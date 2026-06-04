@@ -190,6 +190,40 @@
       transition: color 0.2s !important;
     }
     .scroll-cta:hover { color: #2C2419 !important; background: none !important; }
+
+    /* FOOTER */
+    .site-footer {
+      border-top: 0.5px solid var(--border-soft); padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem; margin-top: 3rem;
+    }
+    .footer-copy { font-size: 12px; color: #6B5744; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-link {
+      font-size: 12px !important; color: #6B5744 !important; cursor: pointer !important;
+      background: none !important; border: none !important; padding: 0 !important;
+      font-family: 'Jost', sans-serif !important; letter-spacing: 0.05em !important;
+      transition: color 0.2s !important;
+    }
+    .footer-link:hover { color: #C4956A !important; background: none !important; }
+
+    /* LEGAL PAGES */
+    .legal-page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .legal-back {
+      font-size: 12px !important; letter-spacing: 0.1em !important; text-transform: uppercase !important;
+      color: #C4956A !important; cursor: pointer !important; background: none !important;
+      border: none !important; font-family: 'Jost', sans-serif !important;
+      margin-bottom: 2.5rem !important; display: inline-block !important; transition: color 0.2s !important;
+    }
+    .legal-back:hover { color: #2C2419 !important; background: none !important; }
+    .legal-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: #2C2419; margin-bottom: 0.4rem; }
+    .legal-updated { font-size: 12px; color: #6B5744; margin-bottom: 3rem; }
+    .legal-section-title { font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #2C2419; margin: 2rem 0 0.75rem; }
+    .legal-body { font-size: 15px; font-weight: 300; line-height: 1.8; color: #4A3B2E; margin-bottom: 0.75rem; }
+    .legal-list { list-style: none; padding: 0; margin-bottom: 0.75rem; }
+    .legal-list li { font-size: 15px; font-weight: 300; line-height: 1.8; color: #4A3B2E; padding-left: 1.2rem; position: relative; }
+    .legal-list li::before { content: '—'; position: absolute; left: 0; color: #C4956A; }
+    .legal-divider { width: 40px; height: 0.5px; background: #C4956A; margin: 2.5rem 0; }
   </style>
 </head>
 <body>
@@ -290,6 +324,170 @@
   </div>
 </div>
 
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-copy">© 2026 Still Here. A place of remembrance.</div>
+  <div class="footer-links">
+    <button class="footer-link" onclick="showPage('privacy')">Privacy Notice</button>
+    <button class="footer-link" onclick="showPage('terms')">Terms of Use</button>
+    <button class="footer-link" onclick="window.location='mailto:stillhere.memorial@gmail.com'">Contact</button>
+  </div>
+</footer>
+
+<!-- PRIVACY NOTICE -->
+<div id="page-privacy" class="page">
+  <div class="legal-page">
+    <button class="legal-back" onclick="showPage('home')">← Back to home</button>
+    <div class="legal-title">Privacy Notice</div>
+    <div class="legal-updated">Last updated: June 2026</div>
+
+    <div class="legal-section-title">1. Who we are</div>
+    <p class="legal-body">Still Here is a pet memorial website that allows people to create and share memories of their departed pets. The website is operated as a personal project.</p>
+    <p class="legal-body">Contact: <a href="mailto:stillhere.memorial@gmail.com" style="color:#C4956A;">stillhere.memorial@gmail.com</a></p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">2. What information we collect</div>
+    <p class="legal-body">When you create a memorial on Still Here, we collect the following information:</p>
+    <ul class="legal-list">
+      <li>Your pet's name</li>
+      <li>Your pet's species and years of life (optional)</li>
+      <li>A written memory or tribute (optional)</li>
+      <li>A photo of your pet (optional)</li>
+    </ul>
+    <p class="legal-body">We do not collect your name, email address, or any other personal information about you as the user. Memorials are submitted anonymously.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">3. How we use your information</div>
+    <p class="legal-body">The information you submit is used solely to display your pet's memorial publicly on the Still Here website, and to store the memorial in our database so it remains accessible over time.</p>
+    <p class="legal-body">We do not use your information for marketing, advertising, or any commercial purpose.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">4. Legal basis for processing (UK GDPR)</div>
+    <p class="legal-body">We process the information you submit on the basis of your consent. By submitting a memorial, you are giving us permission to store and display that content publicly on the website.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">5. Who we share your information with</div>
+    <p class="legal-body">We use the following third-party services to operate the website:</p>
+    <ul class="legal-list">
+      <li>Supabase — our database and file storage provider, used to store memorial text and photos. Data is stored on servers in the EU (Ireland).</li>
+      <li>Vercel — our website hosting provider, used to serve the website to visitors.</li>
+    </ul>
+    <p class="legal-body">We do not sell your data to any third party, and we do not share it with advertisers or data brokers.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">6. How long we keep your information</div>
+    <p class="legal-body">Memorials are kept indefinitely unless you request removal. If you would like a memorial to be deleted, please contact us at <a href="mailto:stillhere.memorial@gmail.com" style="color:#C4956A;">stillhere.memorial@gmail.com</a> with the name of the pet and we will remove it promptly.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">7. Your rights</div>
+    <p class="legal-body">Under UK GDPR, you have the following rights:</p>
+    <ul class="legal-list">
+      <li>The right to request deletion of content you have submitted</li>
+      <li>The right to ask what information we hold</li>
+      <li>The right to object to how we use your information</li>
+    </ul>
+    <p class="legal-body">To exercise any of these rights, please contact <a href="mailto:stillhere.memorial@gmail.com" style="color:#C4956A;">stillhere.memorial@gmail.com</a>. We will respond within 30 days.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">8. Cookies</div>
+    <p class="legal-body">Still Here does not currently use cookies or tracking technology. If this changes in the future, this notice will be updated accordingly.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">9. Children's privacy</div>
+    <p class="legal-body">Still Here is not directed at children under the age of 13. We do not knowingly collect information from children. If you believe a child has submitted content, please contact us and we will remove it.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">10. Changes to this notice</div>
+    <p class="legal-body">We may update this Privacy Notice from time to time. Any changes will be reflected on this page with an updated date at the top.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">11. Contact</div>
+    <p class="legal-body">If you have any questions or concerns about this Privacy Notice, please contact us at <a href="mailto:stillhere.memorial@gmail.com" style="color:#C4956A;">stillhere.memorial@gmail.com</a>.</p>
+  </div>
+</div>
+
+<!-- TERMS OF USE -->
+<div id="page-terms" class="page">
+  <div class="legal-page">
+    <button class="legal-back" onclick="showPage('home')">← Back to home</button>
+    <div class="legal-title">Terms of Use</div>
+    <div class="legal-updated">Last updated: June 2026</div>
+
+    <div class="legal-section-title">1. About Still Here</div>
+    <p class="legal-body">Still Here is a website where people can create and share memorials for their departed pets. By using this website, you agree to these Terms of Use. If you do not agree, please do not use the site.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">2. Who can use Still Here</div>
+    <p class="legal-body">Still Here is open to anyone who wishes to create a memorial for a pet. You must be at least 13 years old to submit content. By submitting a memorial, you confirm that you are doing so in good faith to commemorate a real pet.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">3. Content you submit</div>
+    <p class="legal-body">When you create a memorial, you are responsible for the content you submit. By submitting content, you confirm that:</p>
+    <ul class="legal-list">
+      <li>The content relates to a real pet</li>
+      <li>You own or have the right to use any photos you upload</li>
+      <li>The content does not infringe anyone else's copyright or privacy</li>
+      <li>The content is not offensive, abusive, hateful, or misleading</li>
+    </ul>
+    <p class="legal-body">By submitting content, you grant Still Here a licence to store and display that content on the website. You retain ownership of anything you submit.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">4. Prohibited content</div>
+    <p class="legal-body">The following types of content are not permitted on Still Here:</p>
+    <ul class="legal-list">
+      <li>Content that is not related to a pet memorial</li>
+      <li>Offensive, abusive, racist, or hateful material</li>
+      <li>Spam, fake, or commercial submissions</li>
+      <li>Content that includes personal information about living individuals without their consent</li>
+      <li>Content that violates any applicable law</li>
+    </ul>
+    <p class="legal-body">We reserve the right to remove any content that violates these terms without notice.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">5. Moderation</div>
+    <p class="legal-body">Still Here is operated by a single person on a voluntary basis. We do our best to review content, but we cannot guarantee that all submissions are reviewed before they appear publicly. If you see content that you believe violates these terms, please report it to <a href="mailto:stillhere.memorial@gmail.com" style="color:#C4956A;">stillhere.memorial@gmail.com</a> and we will investigate promptly.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">6. Requesting removal of a memorial</div>
+    <p class="legal-body">If you submitted a memorial and would like it removed, please email <a href="mailto:stillhere.memorial@gmail.com" style="color:#C4956A;">stillhere.memorial@gmail.com</a> with the name of the pet. We will remove it as soon as possible, typically within a few days.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">7. Disclaimer</div>
+    <p class="legal-body">Still Here is provided free of charge and on an "as is" basis. We make no guarantees that the website will be available at all times, that content will be preserved indefinitely, or that the site will be error-free. We are not liable for any loss or damage arising from your use of the website.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">8. Changes to these terms</div>
+    <p class="legal-body">We may update these Terms of Use from time to time. Any changes will be posted on this page with an updated date. Continued use of the site after changes are posted constitutes acceptance of the new terms.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">9. Governing law</div>
+    <p class="legal-body">These terms are governed by the laws of England and Wales.</p>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-section-title">10. Contact</div>
+    <p class="legal-body">For any questions about these Terms of Use, please contact us at <a href="mailto:stillhere.memorial@gmail.com" style="color:#C4956A;">stillhere.memorial@gmail.com</a>.</p>
+  </div>
+</div>
+
 <!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
   <div class="modal">
@@ -347,6 +545,11 @@
         </svg>
         <div class="success-title">Still here</div>
         <p class="success-text">Your pet's memory is now part of this garden.<br>They will not be forgotten.</p>
+        <div style="margin-top:1.5rem;background:#F0EBE3;border:0.5px solid #D4B896;border-radius:3px;padding:1.1rem 1.4rem;text-align:left;">
+          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#C4956A;margin-bottom:0.5rem;">Your removal code</div>
+          <div id="deletion-code-display" style="font-family:'Courier New',monospace;font-size:22px;letter-spacing:0.15em;color:#2C2419;margin-bottom:0.5rem;"></div>
+          <div style="font-size:12px;color:#6B5744;line-height:1.6;">Please save this code. If you ever wish to remove this memorial, you will need to provide it when contacting us at <a href="mailto:stillhere.memorial@gmail.com" style="color:#C4956A;">stillhere.memorial@gmail.com</a>.</div>
+        </div>
         <div style="margin-top:1.5rem;display:flex;gap:0.8rem;justify-content:center;">
           <button class="btn-outline" onclick="closeModal()">Close</button>
           <button class="btn-primary" onclick="closeModal();showPage('browse')">View all memorials</button>
@@ -381,6 +584,13 @@
     if (id === 'browse') loadAllMemorials();
     if (id === 'memorial' && memorialId) loadMemorialPage(memorialId);
   }
+
+  // Make footer visible on legal pages too
+  document.querySelectorAll('.legal-back').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelector('.site-footer').style.display = '';
+    });
+  });
 
   async function loadRecentMemorials() {
     const grid = document.getElementById('recent-grid');
@@ -460,6 +670,16 @@
     return data.publicUrl;
   }
 
+  function generateDeletionCode() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = '';
+    for (let i = 0; i < 8; i++) {
+      if (i === 4) code += '-';
+      code += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return code;
+  }
+
   async function submitMemorial() {
     const name = document.getElementById('pet-name').value.trim();
     const errEl = document.getElementById('form-error');
@@ -475,14 +695,17 @@
     try {
       let photo_url = null;
       if (selectedFile) photo_url = await uploadPhoto(selectedFile);
+      const deletion_code = generateDeletionCode();
       const { error } = await db.from('memorials').insert({
         name,
         species: document.getElementById('pet-species').value.trim() || null,
         years: document.getElementById('pet-years').value.trim() || null,
         memory: document.getElementById('pet-memory').value.trim() || null,
         photo_url,
+        deletion_code,
       });
       if (error) throw error;
+      document.getElementById('deletion-code-display').textContent = deletion_code;
       document.getElementById('modal-form-content').style.display = 'none';
       document.getElementById('modal-success-content').style.display = 'block';
     } catch (err) {
