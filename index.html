@@ -224,6 +224,32 @@
     .legal-list li { font-size: 15px; font-weight: 300; line-height: 1.8; color: #4A3B2E; padding-left: 1.2rem; position: relative; }
     .legal-list li::before { content: '—'; position: absolute; left: 0; color: #C4956A; }
     .legal-divider { width: 40px; height: 0.5px; background: #C4956A; margin: 2.5rem 0; }
+    /* ADMIN */
+    .admin-login { max-width: 400px; margin: 8rem auto; padding: 2.5rem; background: var(--card-bg); border: 0.5px solid var(--border-soft); border-radius: 3px; text-align: center; }
+    .admin-login-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: #2C2419; margin-bottom: 0.4rem; }
+    .admin-login-sub { font-size: 13px; color: #6B5744; margin-bottom: 2rem; }
+    .admin-page { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .admin-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: #2C2419; margin-bottom: 0.3rem; }
+    .admin-sub { font-size: 13px; color: #6B5744; margin-bottom: 2rem; }
+    .admin-search { display: flex; gap: 0.75rem; margin-bottom: 2rem; }
+    .admin-search input { flex: 1; padding: 0.65rem 0.85rem; background: #FDFAF7; border: 0.5px solid rgba(100,75,50,0.25); border-radius: 2px; font-family: 'Jost', sans-serif; font-size: 14px; color: #4A3B2E; outline: none; }
+    .admin-search input:focus { border-color: #C4956A; }
+    .admin-verify-box { background: #F0EBE3; border: 0.5px solid #D4B896; border-radius: 3px; padding: 1.2rem 1.5rem; margin-bottom: 2rem; }
+    .admin-verify-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #C4956A; margin-bottom: 0.75rem; }
+    .admin-verify-row { display: flex; gap: 0.75rem; }
+    .admin-verify-row input { flex: 1; padding: 0.65rem 0.85rem; background: #FDFAF7; border: 0.5px solid rgba(100,75,50,0.25); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 15px; letter-spacing: 0.1em; color: #2C2419; outline: none; }
+    .admin-verify-row input:focus { border-color: #C4956A; }
+    .admin-table { width: 100%; border-collapse: collapse; }
+    .admin-table th { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #C4956A; text-align: left; padding: 0.6rem 0.8rem; border-bottom: 0.5px solid var(--border-soft); }
+    .admin-table td { font-size: 13px; color: #4A3B2E; padding: 0.85rem 0.8rem; border-bottom: 0.5px solid var(--border-soft); vertical-align: middle; }
+    .admin-table tr:hover td { background: #F0EBE3; }
+    .btn-danger { background: transparent !important; color: #8B3A2A !important; border: 1px solid #8B3A2A !important; padding: 0.35rem 0.85rem !important; font-family: 'Jost', sans-serif !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; cursor: pointer !important; border-radius: 2px !important; transition: all 0.2s !important; }
+    .btn-danger:hover { background: #8B3A2A !important; color: #fff !important; }
+    .admin-empty { text-align: center; padding: 3rem; color: #6B5744; font-size: 14px; }
+    .admin-count { font-size: 12px; color: #6B5744; margin-bottom: 1rem; }
+    .verify-result { margin-top: 0.75rem; font-size: 13px; }
+    .verify-result.found { color: #2C6B3A; }
+    .verify-result.notfound { color: #8B3A2A; }
   </style>
 </head>
 <body>
@@ -488,6 +514,54 @@
   </div>
 </div>
 
+<!-- ADMIN LOGIN -->
+<div id="page-admin-login" class="page">
+  <div class="admin-login">
+    <div class="admin-login-title">Admin</div>
+    <p class="admin-login-sub">This area is restricted.</p>
+    <div class="form-group" style="text-align:left;">
+      <label class="form-label">Password</label>
+      <input class="form-input" type="password" id="admin-password-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkAdminPassword()" />
+    </div>
+    <div id="admin-login-error" style="margin-top:0.75rem;"></div>
+    <div style="margin-top:1.5rem;">
+      <button class="btn-primary" style="width:100%;" onclick="checkAdminPassword()">Enter</button>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <button class="footer-link" onclick="showPage('home')">← Back to home</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="page-admin" class="page">
+  <div class="admin-page">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:0.3rem;">
+      <div class="admin-title">Admin Panel</div>
+      <button class="footer-link" onclick="adminLogout()">Log out</button>
+    </div>
+    <p class="admin-sub">Manage all memorials. Deletions are permanent.</p>
+
+    <div class="admin-verify-box">
+      <div class="admin-verify-title">Verify a removal code</div>
+      <div class="admin-verify-row">
+        <input type="text" id="verify-code-input" placeholder="e.g. KXNB-3QM7" maxlength="9" style="text-transform:uppercase;" oninput="this.value=this.value.toUpperCase()" />
+        <button class="btn-primary" onclick="verifyCode()">Look up</button>
+      </div>
+      <div id="verify-result" class="verify-result"></div>
+    </div>
+
+    <div class="admin-search">
+      <input type="text" id="admin-search-input" placeholder="Search by pet name…" oninput="filterAdminTable()" />
+    </div>
+
+    <div id="admin-count" class="admin-count"></div>
+    <div id="admin-table-wrap">
+      <div class="loading"><div class="loading-spinner"></div><br>Loading...</div>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
   <div class="modal">
@@ -745,6 +819,122 @@
     if (wks < 5) return wks + ' week' + (wks !== 1 ? 's' : '') + ' ago';
     const mths = Math.floor(days / 30);
     return mths + ' month' + (mths !== 1 ? 's' : '') + ' ago';
+  }
+
+  // ── ADMIN ──────────────────────────────────────────────────────────────────
+  const ADMIN_PASSWORD_HASH = '864aa191626aa8684627750d43a77b4542bd4d699ac6e6c4c2e3d7c2142c8064';
+  let adminAuthenticated = false;
+  let allMemorials = [];
+
+  async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function checkAdminPassword() {
+    const input = document.getElementById('admin-password-input').value;
+    const hash = await sha256(input);
+    if (hash === ADMIN_PASSWORD_HASH) {
+      adminAuthenticated = true;
+      document.getElementById('admin-password-input').value = '';
+      document.getElementById('admin-login-error').innerHTML = '';
+      showPage('admin');
+      loadAdminMemorials();
+    } else {
+      document.getElementById('admin-login-error').innerHTML = '<div class="error-msg">Incorrect password.</div>';
+    }
+  }
+
+  function adminLogout() {
+    adminAuthenticated = false;
+    showPage('home');
+  }
+
+  async function loadAdminMemorials() {
+    if (!adminAuthenticated) return;
+    const wrap = document.getElementById('admin-table-wrap');
+    wrap.innerHTML = '<div class="loading"><div class="loading-spinner"></div><br>Loading...</div>';
+    const { data, error } = await db.from('memorials').select('id, name, species, years, created_at, deletion_code').order('created_at', { ascending: false });
+    if (error || !data) {
+      wrap.innerHTML = '<p class="admin-empty">Failed to load memorials.</p>';
+      return;
+    }
+    allMemorials = data;
+    renderAdminTable(data);
+  }
+
+  function renderAdminTable(data) {
+    const wrap = document.getElementById('admin-table-wrap');
+    const countEl = document.getElementById('admin-count');
+    countEl.textContent = data.length + ' memorial' + (data.length !== 1 ? 's' : '');
+    if (!data.length) {
+      wrap.innerHTML = '<p class="admin-empty">No memorials found.</p>';
+      return;
+    }
+    wrap.innerHTML = `
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Pet name</th>
+            <th>Species</th>
+            <th>Years</th>
+            <th>Added</th>
+            <th>Code</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.map(m => `
+            <tr id="admin-row-${m.id}">
+              <td><strong>${m.name}</strong></td>
+              <td>${m.species || '—'}</td>
+              <td>${m.years || '—'}</td>
+              <td>${new Date(m.created_at).toLocaleDateString('en-GB')}</td>
+              <td style="font-family:'Courier New',monospace;font-size:12px;color:#6B5744;">${m.deletion_code || '—'}</td>
+              <td><button class="btn-danger" onclick="deleteMemorial('${m.id}', '${m.name.replace(/'/g, "\\'")}')">Delete</button></td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  function filterAdminTable() {
+    const q = document.getElementById('admin-search-input').value.toLowerCase();
+    const filtered = q ? allMemorials.filter(m => m.name.toLowerCase().includes(q)) : allMemorials;
+    renderAdminTable(filtered);
+  }
+
+  async function deleteMemorial(id, name) {
+    if (!confirm(`Permanently delete the memorial for "${name}"? This cannot be undone.`)) return;
+    const { error } = await db.from('memorials').delete().eq('id', id);
+    if (error) {
+      alert('Failed to delete. Please try again.');
+      return;
+    }
+    allMemorials = allMemorials.filter(m => m.id !== id);
+    const row = document.getElementById('admin-row-' + id);
+    if (row) row.remove();
+    const countEl = document.getElementById('admin-count');
+    countEl.textContent = allMemorials.length + ' memorial' + (allMemorials.length !== 1 ? 's' : '');
+  }
+
+  async function verifyCode() {
+    const code = document.getElementById('verify-code-input').value.trim().toUpperCase();
+    const resultEl = document.getElementById('verify-result');
+    if (!code) { resultEl.innerHTML = ''; return; }
+    const match = allMemorials.find(m => m.deletion_code === code);
+    if (match) {
+      resultEl.className = 'verify-result found';
+      resultEl.innerHTML = `✓ Code matches memorial for <strong>${match.name}</strong> (added ${new Date(match.created_at).toLocaleDateString('en-GB')}). You may now delete it above.`;
+    } else {
+      resultEl.className = 'verify-result notfound';
+      resultEl.innerHTML = '✗ No memorial found with that code.';
+    }
+  }
+
+  // Navigate to admin login via URL hash
+  if (window.location.hash === '#admin') {
+    showPage('admin-login');
   }
 
   loadRecentMemorials();
