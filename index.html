@@ -251,6 +251,40 @@
     .verify-result { margin-top: 0.75rem; font-size: 13px; }
     .verify-result.found { color: #2C6B3A; }
     .verify-result.notfound { color: #8B3A2A; }
+    .browse-filters { padding: 1rem 2.5rem; border-bottom: 0.5px solid var(--border-soft); display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .filter-btn { font-size: 12px !important; letter-spacing: 0.07em !important; padding: 0.35rem 0.9rem !important; border: 0.5px solid rgba(100,75,50,0.25) !important; border-radius: 20px !important; background: transparent !important; color: #6B5744 !important; cursor: pointer !important; font-family: 'Jost', sans-serif !important; transition: all 0.2s !important; }
+    .filter-btn:hover { border-color: #C4956A !important; color: #C4956A !important; background: none !important; }
+    .filter-btn.active { background: #2C2419 !important; color: #F7F3EE !important; border-color: #2C2419 !important; }
+    .slideshow { position: relative; width: 100%; margin-bottom: 2rem; border-radius: 3px; overflow: hidden; background: #E8D9C8; }
+    .slideshow img { width: 100%; max-height: 420px; object-fit: cover; display: block; }
+    .slideshow-emoji { font-size: 80px; text-align: center; padding: 2.5rem; }
+    .slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(44,36,25,0.55) !important; color: #F7F3EE !important; border: none !important; width: 36px; height: 36px; border-radius: 50% !important; font-size: 18px; cursor: pointer !important; display: flex; align-items: center; justify-content: center; transition: background 0.2s !important; z-index: 2; }
+    .slide-arrow:hover { background: rgba(44,36,25,0.85) !important; }
+    .slide-prev { left: 0.75rem; } .slide-next { right: 0.75rem; }
+    .slide-dots { position: absolute; bottom: 0.6rem; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; }
+    .slide-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: background 0.2s; }
+    .slide-dot.active { background: #fff; }
+    .share-row { display: flex; gap: 0.6rem; margin-top: 2rem; flex-wrap: wrap; }
+    .share-btn { font-size: 12px !important; letter-spacing: 0.07em !important; padding: 0.45rem 1rem !important; border-radius: 2px !important; cursor: pointer !important; font-family: 'Jost', sans-serif !important; font-weight: 500 !important; transition: all 0.2s !important; }
+    .share-btn-whatsapp { background: #25D366 !important; color: #fff !important; border: none !important; }
+    .share-btn-whatsapp:hover { background: #1ebe5d !important; }
+    .share-btn-facebook { background: #1877F2 !important; color: #fff !important; border: none !important; }
+    .share-btn-facebook:hover { background: #0d6be0 !important; }
+    .share-btn-copy { background: transparent !important; color: #2C2419 !important; border: 1px solid #2C2419 !important; }
+    .share-btn-copy:hover { background: #C4956A !important; border-color: #C4956A !important; color: #2C2419 !important; }
+    .condolences-section { margin-top: 3rem; border-top: 0.5px solid var(--border-soft); padding-top: 2rem; }
+    .condolences-title { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #C4956A; margin-bottom: 1.5rem; }
+    .condolence-input { width: 100%; padding: 0.65rem 0.85rem; background: #FDFAF7; border: 0.5px solid rgba(100,75,50,0.25); border-radius: 2px; font-family: 'Jost', sans-serif; font-size: 14px; color: #4A3B2E; outline: none; transition: border-color 0.2s; resize: vertical; min-height: 80px; line-height: 1.6; }
+    .condolence-input:focus { border-color: #C4956A; }
+    .condolence-actions { display: flex; justify-content: flex-end; margin-top: 0.6rem; }
+    .condolence-item { padding: 1rem 0; border-bottom: 0.5px solid var(--border-soft); }
+    .condolence-item:last-child { border-bottom: none; }
+    .condolence-message { font-size: 15px; font-weight: 300; line-height: 1.7; color: #4A3B2E; }
+    .condolence-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 0.4rem; }
+    .condolence-time { font-size: 11px; color: #6B5744; }
+    .report-btn { font-size: 11px !important; color: #6B5744 !important; background: none !important; border: none !important; cursor: pointer !important; padding: 0 !important; font-family: 'Jost', sans-serif !important; transition: color 0.2s !important; }
+    .report-btn:hover { color: #8B3A2A !important; background: none !important; }
+    .condolence-empty { font-size: 14px; color: #6B5744; font-style: italic; padding: 1rem 0; }
   </style>
 </head>
 <body>
@@ -336,6 +370,16 @@
       <div class="browse-count" id="browse-count">Loading...</div>
     </div>
     <button class="btn-primary" onclick="openModal()">+ Add yours</button>
+  </div>
+  <div class="browse-filters">
+    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setFilter('dog', this)">🐕 Dogs</button>
+    <button class="filter-btn" onclick="setFilter('cat', this)">🐈 Cats</button>
+    <button class="filter-btn" onclick="setFilter('rabbit', this)">🐇 Rabbits</button>
+    <button class="filter-btn" onclick="setFilter('bird', this)">🐦 Birds</button>
+    <button class="filter-btn" onclick="setFilter('fish', this)">🐠 Fish</button>
+    <button class="filter-btn" onclick="setFilter('horse', this)">🐴 Horses</button>
+    <button class="filter-btn" onclick="setFilter('other', this)">🌿 Other</button>
   </div>
   <div class="browse-grid-wrap">
     <div class="browse-grid" id="memorial-grid">
@@ -589,12 +633,13 @@
         <textarea class="form-textarea" id="pet-memory" placeholder="Share a favourite memory, a personality trait, or simply what you miss most..."></textarea>
       </div>
       <div class="form-group">
-        <label class="form-label">Photo</label>
+        <label class="form-label">Photos (up to 3)</label>
         <div class="upload-area" onclick="document.getElementById('photo-input').click()">
           <div style="font-size:24px;color:#C4956A;">⬆</div>
-          <div class="upload-text" id="upload-text">Click to upload a photo of your pet</div>
+          <div class="upload-text" id="upload-text">Click to upload photos of your pet</div>
         </div>
-        <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="handlePhoto(event)" />
+        <input type="file" id="photo-input" accept="image/*" multiple style="display:none" onchange="handlePhotos(event)" />
+        <div id="photo-preview" style="display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;"></div>
       </div>
       <div id="form-error"></div>
       <div class="modal-actions">
@@ -686,18 +731,31 @@
       </div>`).join('');
   }
 
-  async function loadAllMemorials() {
+  let allBrowseMemorials = [];
+  let activeFilter = 'all';
+
+  function setFilter(filter, btn) {
+    activeFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderBrowseGrid();
+  }
+
+  function matchesFilter(m, filter) {
+    if (filter === 'all') return true;
+    const sl = (m.species || '').toLowerCase();
+    if (filter === 'other') { return !['dog','cat','rabbit','bunny','bird','fish','horse'].some(k => sl.includes(k)); }
+    const aliases = { rabbit: ['rabbit','bunny'] };
+    return (aliases[filter] || [filter]).some(t => sl.includes(t));
+  }
+
+  function renderBrowseGrid() {
     const grid = document.getElementById('memorial-grid');
     const countEl = document.getElementById('browse-count');
-    grid.innerHTML = '<div class="loading" style="grid-column:1/-1"><div class="loading-spinner"></div><br>Loading...</div>';
-    const { data, error } = await db.from('memorials').select('*').order('created_at', { ascending: false });
-    if (error || !data || !data.length) {
-      grid.innerHTML = '<p style="color:#6B5744;font-size:14px;grid-column:1/-1;padding:1rem 0;">No memorials yet — be the first to add one.</p>';
-      countEl.textContent = '0 lives remembered';
-      return;
-    }
-    countEl.textContent = data.length + ' life' + (data.length !== 1 ? 's' : '') + ' remembered';
-    grid.innerHTML = data.map(m => `
+    const filtered = allBrowseMemorials.filter(m => matchesFilter(m, activeFilter));
+    countEl.textContent = filtered.length + ' life' + (filtered.length !== 1 ? 's' : '') + ' remembered';
+    if (!filtered.length) { grid.innerHTML = '<p style="color:#6B5744;font-size:14px;grid-column:1/-1;padding:1rem 0;">No memorials found for this filter.</p>'; return; }
+    grid.innerHTML = filtered.map(m => `
       <div class="memorial-card" onclick="showPage('memorial','${m.id}')">
         <div class="memorial-img-wrap">${m.photo_url ? `<img src="${m.photo_url}" alt="${m.name}">` : getEmoji(m.species)}</div>
         <div class="memorial-body">
@@ -709,31 +767,149 @@
       </div>`).join('');
   }
 
+  async function loadAllMemorials() {
+    const grid = document.getElementById('memorial-grid');
+    const countEl = document.getElementById('browse-count');
+    grid.innerHTML = '<div class="loading" style="grid-column:1/-1"><div class="loading-spinner"></div><br>Loading...</div>';
+    const { data, error } = await db.from('memorials').select('*').order('created_at', { ascending: false });
+    if (error || !data || !data.length) {
+      grid.innerHTML = '<p style="color:#6B5744;font-size:14px;grid-column:1/-1;padding:1rem 0;">No memorials yet — be the first to add one.</p>';
+      countEl.textContent = '0 lives remembered'; return;
+    }
+    allBrowseMemorials = data;
+    renderBrowseGrid();
+  }
+
+  let slideIndex = 0;
+  let slidePhotos = [];
+
+  function buildSlideshow(photos, species, name) {
+    if (!photos || !photos.length) return `<div class="slideshow"><div class="slideshow-emoji">${getEmoji(species)}</div></div>`;
+    if (photos.length === 1) return `<div class="slideshow"><img src="${photos[0]}" alt="${name}"></div>`;
+    const dots = photos.map((_, i) => `<div class="slide-dot${i===0?' active':''}" onclick="goSlide(${i})"></div>`).join('');
+    return `<div class="slideshow"><img id="slide-img" src="${photos[0]}" alt="${name}"><button class="slide-arrow slide-prev" onclick="goSlide(slideIndex-1)">&#8249;</button><button class="slide-arrow slide-next" onclick="goSlide(slideIndex+1)">&#8250;</button><div class="slide-dots">${dots}</div></div>`;
+  }
+
+  function goSlide(n) {
+    slideIndex = ((n % slidePhotos.length) + slidePhotos.length) % slidePhotos.length;
+    document.getElementById('slide-img').src = slidePhotos[slideIndex];
+    document.querySelectorAll('.slide-dot').forEach((d,i) => d.classList.toggle('active', i===slideIndex));
+  }
+
+  function buildShareRow(id, name, memory) {
+    const url = encodeURIComponent(window.location.origin + window.location.pathname + '#memorial/' + id);
+    const text = encodeURIComponent('In memory of ' + name + ' — ' + (memory||'').slice(0,80));
+    return `<div class="share-row">
+      <button class="share-btn share-btn-whatsapp" onclick="window.open('https://wa.me/?text=${text}%20${url}','_blank')">WhatsApp</button>
+      <button class="share-btn share-btn-facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${url}','_blank')">Facebook</button>
+      <button class="share-btn share-btn-copy" onclick="copyMemorialLink('${id}', this)">Copy link</button>
+    </div>`;
+  }
+
+  function copyMemorialLink(id, btn) {
+    const url = window.location.origin + window.location.pathname + '#memorial/' + id;
+    navigator.clipboard.writeText(url).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy link', 2000);
+    });
+  }
+
   async function loadMemorialPage(id) {
+    slideIndex = 0; slidePhotos = [];
     const content = document.getElementById('memorial-page-content');
     content.innerHTML = '<div class="loading"><div class="loading-spinner"></div><br>Loading...</div>';
     const { data, error } = await db.from('memorials').select('*').eq('id', id).single();
-    if (error || !data) {
-      content.innerHTML = '<p style="color:#6B5744;">Memorial not found.</p>';
-      return;
-    }
+    if (error || !data) { content.innerHTML = '<p style="color:#6B5744;">Memorial not found.</p>'; return; }
+    slidePhotos = data.photo_urls && data.photo_urls.length ? data.photo_urls : (data.photo_url ? [data.photo_url] : []);
     content.innerHTML = `
       <button class="memorial-page-back" onclick="showPage('browse')">← Back to memorials</button>
-      ${data.photo_url
-        ? `<img src="${data.photo_url}" alt="${data.name}" style="width:100%;max-height:400px;object-fit:cover;border-radius:3px;margin-bottom:2rem;">`
-        : `<div style="font-size:80px;text-align:center;padding:2.5rem;background:#E8D9C8;border-radius:3px;margin-bottom:2rem;">${getEmoji(data.species)}</div>`
-      }
+      ${buildSlideshow(slidePhotos, data.species, data.name)}
       <div class="memorial-page-name">${data.name}</div>
-      <div class="memorial-page-meta">${data.species || 'Beloved companion'}${data.years ? ' · ' + data.years : ''}</div>
+      <div class="memorial-page-meta">${data.species||'Beloved companion'}${data.years?' · '+data.years:''}</div>
       <div class="memorial-page-divider"></div>
-      <div class="memorial-page-memory">${data.memory || 'Forever in our hearts.'}</div>
-      <div class="memorial-page-date">Added ${timeAgo(data.created_at)}</div>`;
+      <div class="memorial-page-memory">${data.memory||'Forever in our hearts.'}</div>
+      <div class="memorial-page-date">Added ${timeAgo(data.created_at)}</div>
+      ${buildShareRow(id, data.name, data.memory)}
+      <div class="condolences-section">
+        <div class="condolences-title">Leave a condolence</div>
+        <div>
+          <textarea class="condolence-input" id="condolence-input" placeholder="Share a kind word or memory..."></textarea>
+          <div class="condolence-actions"><button class="btn-primary" onclick="submitCondolence('${id}')">Post condolence</button></div>
+          <div id="condolence-error"></div>
+        </div>
+        <div id="condolence-list" style="margin-top:1.5rem;"><div class="loading"><div class="loading-spinner"></div></div></div>
+      </div>`;
+    loadCondolences(id);
   }
 
-  let selectedFile = null;
-  function handlePhoto(e) {
-    selectedFile = e.target.files[0];
-    if (selectedFile) document.getElementById('upload-text').textContent = '📷 ' + selectedFile.name;
+  async function loadCondolences(memorialId) {
+    const list = document.getElementById('condolence-list');
+    const { data, error } = await db.from('condolences').select('*').eq('memorial_id', memorialId).order('created_at', { ascending: true });
+    if (error || !data || !data.length) { list.innerHTML = '<p class="condolence-empty">No condolences yet — be the first to leave one.</p>'; return; }
+    list.innerHTML = data.map(c => `
+      <div class="condolence-item">
+        <div class="condolence-message">${c.message.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+        <div class="condolence-meta">
+          <span class="condolence-time">${timeAgo(c.created_at)}</span>
+          <button class="report-btn" onclick="reportCondolence('${c.id}','${memorialId}')">Report</button>
+        </div>
+      </div>`).join('');
+  }
+
+  async function submitCondolence(memorialId) {
+    const input = document.getElementById('condolence-input');
+    const errEl = document.getElementById('condolence-error');
+    const msg = input.value.trim();
+    errEl.innerHTML = '';
+    if (!msg) { errEl.innerHTML = '<div class="error-msg" style="margin-top:0.5rem;">Please write a message first.</div>'; return; }
+    if (msg.length > 500) { errEl.innerHTML = '<div class="error-msg" style="margin-top:0.5rem;">Please keep condolences under 500 characters.</div>'; return; }
+    const { error } = await db.from('condolences').insert({ memorial_id: memorialId, message: msg });
+    if (error) { errEl.innerHTML = '<div class="error-msg" style="margin-top:0.5rem;">Something went wrong. Please try again.</div>'; return; }
+    input.value = '';
+    loadCondolences(memorialId);
+  }
+
+  function reportCondolence(condolenceId, memorialId) {
+    const subject = encodeURIComponent('Report: Inappropriate condolence on Still Here');
+    const body = encodeURIComponent('I would like to report a condolence message.\n\nMemorial ID: ' + memorialId + '\nCondolence ID: ' + condolenceId + '\n\nReason: ');
+    window.location.href = 'mailto:stillhere.memorial@gmail.com?subject=' + subject + '&body=' + body;
+  }
+
+  let selectedFiles = [];
+
+  function renderPhotoPreviews() {
+    const preview = document.getElementById('photo-preview');
+    preview.innerHTML = '';
+    const count = selectedFiles.length;
+    document.getElementById('upload-text').textContent = count ? count + ' photo' + (count !== 1 ? 's' : '') + ' selected' : 'Click to upload photos of your pet';
+    selectedFiles.forEach((f, i) => {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'position:relative;display:inline-block;';
+        const img = document.createElement('img');
+        img.src = ev.target.result;
+        img.style.cssText = 'width:70px;height:70px;object-fit:cover;border-radius:2px;border:0.5px solid rgba(100,75,50,0.2);display:block;';
+        const btn = document.createElement('button');
+        btn.innerHTML = '&times;';
+        btn.style.cssText = 'position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#2C2419;color:#F7F3EE;border:none;cursor:pointer;font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;';
+        btn.onclick = () => { selectedFiles.splice(i, 1); renderPhotoPreviews(); };
+        wrap.appendChild(img); wrap.appendChild(btn); preview.appendChild(wrap);
+      };
+      reader.readAsDataURL(f);
+    });
+  }
+
+  function handlePhotos(e) {
+    const newFiles = Array.from(e.target.files);
+    const remaining = 3 - selectedFiles.length;
+    if (newFiles.length > remaining && remaining > 0) {
+      document.getElementById('form-error').innerHTML = '<div class="error-msg">Maximum 3 photos. Only the first ' + remaining + ' were added.</div>';
+      setTimeout(() => { const el = document.getElementById('form-error'); if (el) el.innerHTML = ''; }, 3000);
+    }
+    selectedFiles = [...selectedFiles, ...newFiles].slice(0, 3);
+    renderPhotoPreviews();
+    e.target.value = '';
   }
 
   async function uploadPhoto(file) {
@@ -769,7 +945,12 @@
     btn.disabled = true;
     try {
       let photo_url = null;
-      if (selectedFile) photo_url = await uploadPhoto(selectedFile);
+      let photo_urls = [];
+      if (selectedFiles.length > 0) {
+        const uploads = await Promise.all(selectedFiles.map(f => uploadPhoto(f)));
+        photo_urls = uploads;
+        photo_url = uploads[0];
+      }
       const deletion_code = generateDeletionCode();
       const { error } = await db.from('memorials').insert({
         name,
@@ -777,6 +958,7 @@
         years: document.getElementById('pet-years').value.trim() || null,
         memory: document.getElementById('pet-memory').value.trim() || null,
         photo_url,
+        photo_urls: photo_urls.length ? photo_urls : null,
         deletion_code,
       });
       if (error) throw error;
@@ -800,9 +982,10 @@
   function closeModal() {
     document.getElementById('modal-overlay').classList.remove('open');
     ['pet-name','pet-species','pet-years','pet-memory'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('upload-text').textContent = 'Click to upload a photo of your pet';
+    document.getElementById('upload-text').textContent = 'Click to upload photos of your pet';
     document.getElementById('form-error').innerHTML = '';
-    selectedFile = null;
+    document.getElementById('photo-preview').innerHTML = '';
+    selectedFiles = [];
     document.getElementById('photo-input').value = '';
   }
   function handleOverlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
