@@ -79,7 +79,7 @@
     /* RECENT STRIP */
     .recent-strip { padding: 3rem 2.5rem; border-top: 0.5px solid var(--border-soft); }
     .section-label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #C4956A; margin-bottom: 1.5rem; }
-    .strip-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 280px)); gap: 1.5rem; }
+    .strip-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 280px)); gap: 1.5rem; justify-content: center; }
     .strip-card {
       background: var(--card-bg); border: 0.5px solid var(--border-soft);
       border-radius: 3px; overflow: hidden; cursor: pointer; transition: transform 0.25s;
@@ -753,7 +753,7 @@
     const grid = document.getElementById('memorial-grid');
     const countEl = document.getElementById('browse-count');
     const filtered = allBrowseMemorials.filter(m => matchesFilter(m, activeFilter));
-    countEl.textContent = filtered.length + ' life' + (filtered.length !== 1 ? 's' : '') + ' remembered';
+    countEl.textContent = filtered.length + (filtered.length !== 1 ? ' lives' : ' life') + ' remembered';
     if (!filtered.length) { grid.innerHTML = '<p style="color:#6B5744;font-size:14px;grid-column:1/-1;padding:1rem 0;">No memorials found for this filter.</p>'; return; }
     grid.innerHTML = filtered.map(m => `
       <div class="memorial-card" onclick="showPage('memorial','${m.id}')">
