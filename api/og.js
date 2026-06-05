@@ -1,5 +1,7 @@
-· JS
-export default async function handler(req, res) {
+const fs = require('fs');
+const path = require('path');
+ 
+module.exports = async function handler(req, res) {
   const { id } = req.query;
  
   const SUPABASE_URL = 'https://fdpusoayzjbuapgqmnoz.supabase.co';
@@ -27,12 +29,8 @@ export default async function handler(req, res) {
     }
   }
  
-  // Read the index.html from the filesystem
-  const fs = await import('fs');
-  const path = await import('path');
   let html = fs.readFileSync(path.join(process.cwd(), 'index.html'), 'utf8');
  
-  // Inject OG tags into <head>
   const ogTags = `
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
@@ -50,7 +48,7 @@ export default async function handler(req, res) {
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
   res.status(200).send(html);
-}
+};
  
 function escapeHtml(str) {
   return String(str)
