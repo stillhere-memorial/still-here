@@ -797,7 +797,8 @@
   }
 
   function buildShareRow(id, name, memory) {
-    const url = encodeURIComponent(window.location.origin + window.location.pathname + '#memorial/' + id);
+    const shareUrl = window.location.origin + '/memorial/' + id;
+    const url = encodeURIComponent(shareUrl);
     const text = encodeURIComponent('In memory of ' + name + ' — ' + (memory||'').slice(0,80));
     return `<div class="share-row">
       <button class="share-btn share-btn-whatsapp" onclick="window.open('https://wa.me/?text=${text}%20${url}','_blank')">WhatsApp</button>
@@ -807,7 +808,7 @@
   }
 
   function copyMemorialLink(id, btn) {
-    const url = window.location.origin + window.location.pathname + '#memorial/' + id;
+    const url = window.location.origin + '/memorial/' + id;
     navigator.clipboard.writeText(url).then(() => {
       btn.textContent = 'Copied!';
       setTimeout(() => btn.textContent = 'Copy link', 2000);
@@ -1118,9 +1119,12 @@
 
   // Capture hash immediately before anything can change it
   const _initHash = window.location.hash;
+  const _initPath = window.location.pathname;
 
-  // Navigate to admin login via URL hash
-  if (_initHash === '#admin') {
+  if (_initPath.startsWith('/memorial/')) {
+    const _initId = _initPath.replace('/memorial/', '');
+    showPage('memorial', _initId);
+  } else if (_initHash === '#admin') {
     showPage('admin-login');
   } else if (_initHash.startsWith('#memorial/')) {
     const _initId = _initHash.replace('#memorial/', '');
