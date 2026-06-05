@@ -35,9 +35,15 @@ module.exports = async function handler(req, res) {
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://${req.headers.host}${req.url}">
+  <meta property="og:url" content="https://${req.headers.host}/memorial/${id || ''}">
   <meta property="og:site_name" content="Still Here">
-  ${image ? `<meta property="og:image" content="${escapeHtml(image)}">` : ''}
+  ${image ? `
+  <meta property="og:image" content="${escapeHtml(image)}">
+  <meta property="og:image:secure_url" content="${escapeHtml(image)}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  ` : ''}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
