@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/memorial/:id",
+      "destination": "/api/og?id=:id"
+    }
+  ]
+}
