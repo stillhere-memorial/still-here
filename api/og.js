@@ -14,7 +14,7 @@ module.exports = async function handler(req, res) {
   if (id) {
     try {
       const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/memorials?id=eq.${id}&select=name,species,years,memory,photo_url`,
+        `${SUPABASE_URL}/rest/v1/memorials?id=eq.${id}&select=name,species,years,memory,photo_url,photo_urls`,
         { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
       );
       const data = await response.json();
@@ -22,7 +22,7 @@ module.exports = async function handler(req, res) {
         const m = data[0];
         title = `In memory of ${m.name}${m.species ? ` — ${m.species}` : ''}${m.years ? ` · ${m.years}` : ''}`;
         description = m.memory ? m.memory.slice(0, 200) : 'Forever loved. Forever missed. Still here.';
-        image = m.photo_url || '';
+        image = (m.photo_urls && m.photo_urls.length > 0) ? m.photo_urls[0] : (m.photo_url || '');
       }
     } catch (e) {
       // fall through to defaults
@@ -57,4 +57,5 @@ function escapeHtml(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 }
+ 
  
