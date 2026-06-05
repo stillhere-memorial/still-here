@@ -722,7 +722,7 @@
     }
     grid.innerHTML = data.map(m => `
       <div class="strip-card" onclick="showPage('memorial','${m.id}')">
-        <div class="card-img-wrap">${m.photo_url ? `<img src="${m.photo_url}" alt="${m.name}">` : getEmoji(m.species)}</div>
+        <div class="card-img-wrap">${(m.photo_url || (m.photo_urls && m.photo_urls[0])) ? `<img src="${m.photo_url || m.photo_urls[0]}" alt="${m.name}">` : getEmoji(m.species)}</div>
         <div class="strip-card-body">
           <div class="strip-card-name">${m.name}</div>
           <div class="strip-card-species">${m.species || 'Beloved companion'}${m.years ? ' · ' + m.years : ''}</div>
@@ -757,7 +757,7 @@
     if (!filtered.length) { grid.innerHTML = '<p style="color:#6B5744;font-size:14px;grid-column:1/-1;padding:1rem 0;">No memorials found for this filter.</p>'; return; }
     grid.innerHTML = filtered.map(m => `
       <div class="memorial-card" onclick="showPage('memorial','${m.id}')">
-        <div class="memorial-img-wrap">${m.photo_url ? `<img src="${m.photo_url}" alt="${m.name}">` : getEmoji(m.species)}</div>
+        <div class="memorial-img-wrap">${(m.photo_url || (m.photo_urls && m.photo_urls[0])) ? `<img src="${m.photo_url || m.photo_urls[0]}" alt="${m.name}">` : getEmoji(m.species)}</div>
         <div class="memorial-body">
           <div class="memorial-name">${m.name}</div>
           <div class="memorial-meta">${m.species || 'Beloved companion'}${m.years ? ' · ' + m.years : ''}</div>
